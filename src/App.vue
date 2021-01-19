@@ -4,8 +4,9 @@
     <h3>{{ age }}</h3>
     <button @click="setAge">Add Age</button>
     <div>
-      <input type="text" placeholder="First Name" @input="setFirstName" />
-      <input type="text" placeholder="Last Name" @input="setLastName" />
+      <!-- v-model reconoce los argumentos pasados como refs -->
+      <input type="text" placeholder="First Name" v-model="firstName" />
+      <input type="text" placeholder="Last Name" v-model="lastName" />
     </div>
   </section>
 </template>
@@ -35,22 +36,22 @@ export default {
       uAge.value += 1;
     }
 
-    function setFirstName(event) {
-      firstName.value = event.target.value;
-    }
+    // function setFirstName(event) {
+    //   firstName.value = event.target.value;
+    // }
 
-    function setLastName(event) {
-      lastName.value = event.target.value;
-    }
+    // function setLastName(event) {
+    //   lastName.value = event.target.value;
+    // }
 
-    // Recordatorio cuando se pase un solo valor como setFirstName usamos,
+    // Recordatorio cuando se pase un solo valor como setFirstName (actualizacion firstName) usamos,
     // shortcuts modernos de Javascript el cual en realidad es setFirstName: setFirstName
     return {
       userName: uName,
       age: uAge,
       setAge: setNewAge,
-      setFirstName,
-      setLastName,
+      firstName,
+      lastName
     };
   },
 
