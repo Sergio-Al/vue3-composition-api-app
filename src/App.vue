@@ -1,29 +1,57 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h3>{{ user.age }}</h3>
+    <h2>{{ userName }}</h2>
+    <h3>{{ age }}</h3>
     <button @click="setAge">Add Age</button>
+    <div>
+      <input type="text" placeholder="First Name" @input="setFirstName" />
+      <input type="text" placeholder="Last Name" @input="setLastName" />
+    </div>
   </section>
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { ref, computed } from 'vue';
 export default {
   setup() {
     // const uName = ref('Sergio');
-    // const uAge = ref(23);
+    const firstName = ref('');
+    const lastName = ref('');
+    const uAge = ref(23);
 
     // reactive only works with objects
-    const user = reactive({
-      name: 'Sergio',
-      age: 23,
+    // const user = reactive({
+    //   name: 'Sergio',
+    //   age: 23,
+    // });
+
+    // computed properties generan variables de tipo ref de 'solo lectura'
+    // los ref normales generan variables de lectura y escritura
+    const uName = computed(function() {
+      return firstName.value + ' ' + lastName.value;
     });
 
     function setNewAge() {
-      user.age += 1;
+      uAge.value += 1;
     }
 
-    return { user: user, setAge: setNewAge };
+    function setFirstName(event) {
+      firstName.value = event.target.value;
+    }
+
+    function setLastName(event) {
+      lastName.value = event.target.value;
+    }
+
+    // Recordatorio cuando se pase un solo valor como setFirstName usamos,
+    // shortcuts modernos de Javascript el cual en realidad es setFirstName: setFirstName
+    return {
+      userName: uName,
+      age: uAge,
+      setAge: setNewAge,
+      setFirstName,
+      setLastName,
+    };
   },
 
   // data() {
