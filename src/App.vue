@@ -1,22 +1,33 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
+    <h2>{{ user.name }}</h2>
+    <h3>{{ user.age }}</h3>
   </section>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 export default {
-  setup(){
-    const uName = ref('Sergio');
+  setup() {
+    // const uName = ref('Sergio');
+    // const uAge = ref(23);
 
+    // reactive only works with objects
+    const user = reactive({
+      name: 'Sergio',
+      age: 23,
+    });
+    
     setTimeout(() => {
-      uName.value = 'Alejandro';
-    }, 2000) 
+      // uName.value = 'Alejandro';
+      // uAge.value = 24;
+      user.name = 'Alejandro';
+      user.age = 24;
+    }, 2000);
 
-    return { userName: uName };
-  }
-  
+    return { user: user };
+  },
+
   // data() {
   //   return {
   //     userName: 'Maximilian',
