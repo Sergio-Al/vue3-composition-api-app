@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 export default {
   setup() {
     // const uName = ref('Sergio');
@@ -28,8 +28,16 @@ export default {
 
     // computed properties generan variables de tipo ref de 'solo lectura'
     // los ref normales generan variables de lectura y escritura
-    const uName = computed(function() {
+    const uName = computed(function () {
       return firstName.value + ' ' + lastName.value;
+    });
+
+    // uso del watch en setup composition api
+    watch([uAge, uName], function (newValues, oldValues) {
+      console.log('Old age: ' + oldValues[0]);
+      console.log('New Age: ' + newValues[0]);
+      console.log('Old Name: ' + oldValues[1]);
+      console.log('New Name: ' + newValues[1]);
     });
 
     function setNewAge() {
@@ -51,7 +59,7 @@ export default {
       age: uAge,
       setAge: setNewAge,
       firstName,
-      lastName
+      lastName,
     };
   },
 
