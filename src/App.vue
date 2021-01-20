@@ -6,7 +6,9 @@
     <div>
       <!-- v-model reconoce los argumentos pasados como refs -->
       <input type="text" placeholder="First Name" v-model="firstName" />
-      <input type="text" placeholder="Last Name" v-model="lastName" />
+      <!-- ref tambien puede ser accedido desde setup funcion -->
+      <input type="text" placeholder="Last Name" ref="lastNameInput" />
+      <button @click="setLastName">Set last Name</button>
     </div>
   </section>
 </template>
@@ -18,6 +20,7 @@ export default {
     // const uName = ref('Sergio');
     const firstName = ref('');
     const lastName = ref('');
+    const lastNameInput = ref(null);
     const uAge = ref(23);
 
     // reactive only works with objects
@@ -44,6 +47,11 @@ export default {
       uAge.value += 1;
     }
 
+    function setLastName() {
+      // el primer value es del ref de setup y el segundo del template el cual accede
+      lastName.value = lastNameInput.value.value;
+    }
+
     // function setFirstName(event) {
     //   firstName.value = event.target.value;
     // }
@@ -59,7 +67,8 @@ export default {
       age: uAge,
       setAge: setNewAge,
       firstName,
-      lastName,
+      lastNameInput,
+      setLastName
     };
   },
 
