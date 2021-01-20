@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <user-data :first-name="firstName" :last-name="lastName" :age="age">
+    <user-data class="test" :first-name="firstName" :last-name="lastName">
     </user-data>
     <button @click="setAge">Add Age</button>
     <div>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, provide } from 'vue';
 import UserData from './components/UserData.vue';
 export default {
   components: {
@@ -32,6 +32,8 @@ export default {
     //   name: 'Sergio',
     //   age: 23,
     // });
+
+    provide('userAge', uAge);
 
     // computed properties generan variables de tipo ref de 'solo lectura'
     // los ref normales generan variables de lectura y escritura
@@ -86,7 +88,15 @@ export default {
   //   setNewAge(){
   //     this.age = 24;
   //   }
-  // }
+  // },
+  // watch: {
+  //   age(val) {
+  //     console.log(val);
+  //   },
+  // },
+  // provide() {
+  //   return { age: this.age };
+  // },
 };
 </script>
 
