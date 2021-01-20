@@ -1,7 +1,7 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
-    <h3>{{ age }}</h3>
+    <user-data :first-name="firstName" :last-name="lastName" :age="age">
+    </user-data>
     <button @click="setAge">Add Age</button>
     <div>
       <!-- v-model reconoce los argumentos pasados como refs -->
@@ -15,7 +15,11 @@
 
 <script>
 import { ref, computed, watch } from 'vue';
+import UserData from './components/UserData.vue';
 export default {
+  components: {
+    UserData,
+  },
   setup() {
     // const uName = ref('Sergio');
     const firstName = ref('');
@@ -67,8 +71,9 @@ export default {
       age: uAge,
       setAge: setNewAge,
       firstName,
+      lastName,
       lastNameInput,
-      setLastName
+      setLastName,
     };
   },
 
